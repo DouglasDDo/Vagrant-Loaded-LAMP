@@ -12,3 +12,7 @@ Open up your preferred command line interface (CLI) in the folder you just clone
 Run "./setup.sh" and respond to the prompts. 
 
 That's it.
+
+###Future Plans:
+* Add environment configuration in bootstrap>start.php to Laravel.sh
+* Add autoload arrays for PSR and files in composer.json to Laravel.sh
