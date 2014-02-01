@@ -5,7 +5,9 @@ These scripts and the accompanying Vagrantfile can be used to set up either a pl
 It's still a work in progress but it works for the most part. 
 
 #Instructions
-Open up your preferred command line interface (CLI) in the folder in which you want to keep your Vagrantfile.
+Clone this repo in whichever folder you want to hold your Vagrantfile and project docroot or Laravel folder.
+
+Open up your preferred command line interface (CLI) in the folder you just cloned to.
 
 Run "./setup.sh" and respond to the prompts. 
 
