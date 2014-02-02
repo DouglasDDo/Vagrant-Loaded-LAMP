@@ -19,7 +19,7 @@ read HOSTING
 
 if [[ $HOSTING ]]; then
 	#Check for numbers 1-3 digits in length. Check to see that each octet is less than or equal to 255.
-	while [[ -z $(echo $HOSTING | egrep -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}') || -z $(echo $HOSTING | awk -F'.' '$1 <=255 && $2 <= 255 && $3 <= 255 && $4 <= 255') ]]
+	while [[ ! $(echo $HOSTING | egrep -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}') || ! $(echo $HOSTING | awk -F'.' '$1 <=255 && $2 <= 255 && $3 <= 255 && $4 <= 255') ]]
 		do
 			echo '-- The IP address was not valid. Try again. --'
 			read HOSTING
@@ -55,7 +55,7 @@ echo '-- If no number is entered, the base memory of your Virtual Box VM  will d
 read MEMORYSIZE
 #Check that a number up to 4 digits in length is entered. Check to see that the number entered is between 64 and 8192.
 if [[ $MEMORYSIZE ]]; then
-	while [[ -z $(echo $MEMORYSIZE | egrep -E '[0-9]{1,4}') || -z $(echo $MEMORYSIZE | awk '$1 <= 8192 && $1 >=64') ]]
+	while [[ ! $(echo $MEMORYSIZE | egrep -E '[0-9]{1,4}') || ! $(echo $MEMORYSIZE | awk '$1 <= 8192 && $1 >=64') ]]
 		do
 			echo '-- Please enter a valid number --'
 			read MEMORYSIZE
@@ -89,6 +89,12 @@ while true;
 	        * ) echo '-- Please answer yes or no. --';;
 	    esac
 done
+
+#check if laravel, then prompt for environment setttings
+# if [[ condition ]]; then
+
+# fi
+
 #Set Laravel check to "yes" or "no", depending on input
 sed -i "s/LARACHECK/$LARAVEL/g" lamp.sh
 
@@ -97,7 +103,7 @@ echo '-- If no name is entered you will have to create your database manually. -
 read DBNAME
 
 if [[ $DBNAME ]]; then
-	while [[ -z $(echo $DBNAME | egrep -E '[a-zA-Z0-9\\\_\\\$]{1,64}$') ]]; do
+	while [[ ! $(echo $DBNAME | egrep -E '[a-zA-Z0-9\\\_\\\$]{1,64}$') ]]; do
 		echo '-- Databases have a max length of 64 characters and may only use alphanumeric characters, underscores, and dollar signs. --'
 		echo '-- Please enter a valid database name. --'
 		read DBNAME
