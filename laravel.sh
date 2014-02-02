@@ -22,7 +22,6 @@ composer require --dev --no-update way/generators:dev-master
 sed -i "/WorkbenchServiceProvider/a \\\t\t'Way\\\Generators\\\GeneratorsServiceProvider'," /vagrant/${PROJECT_NAME}/app/config/app.php
 sed -i $"{/\"classmap\"/,/]/ { s/]/],/g}}" composer.json
 sed -ie "/\"classmap\"/,/],/!b;/],/a\\\t\t\"psr-4\": {},\n\\t\t\"files\": []" composer.json
-#cd /vagrant/${PROJECT_NAME}
 composer dump-autoload
 composer update
 
