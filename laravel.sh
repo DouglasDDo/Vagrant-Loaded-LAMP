@@ -20,7 +20,9 @@ sudo ln -fs /vagrant/${PROJECT_NAME}/public /var/www
 echo "Adding stuff to Composer.json"
 composer require --dev --no-update way/generators:dev-master
 sed -i "/WorkbenchServiceProvider/a \\\t\t'Way\\\Generators\\\GeneratorsServiceProvider'," /vagrant/${PROJECT_NAME}/app/config/app.php
-cd /vagrant/${PROJECT_NAME}
+sed -i $"{/\"classmap\"/,/]/ { s/]/],/g}}" composer.json
+sed -ie "/\"classmap\"/,/],/!b;/],/a\\\t\t\"psr-4\": {},\n\\t\t\"files\": []" composer.json
+#cd /vagrant/${PROJECT_NAME}
 composer dump-autoload
 composer update
 
