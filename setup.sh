@@ -45,9 +45,9 @@ echo "-- If you do not enter a name, the host name will default to 'localhost' -
 read HOSTNAME
 
 if [[ $HOSTNAME ]]; then
-	sed -i "s/HOSTNAME/$HOSTNAME/g" lamp.sh
+	sed -i "s/HOSTNAME/$HOSTNAME/g" lamp.sh laravel.sh
 else
-	sed -i "s/HOSTNAME/localhost/g" lamp.sh
+	sed -i "s/HOSTNAME/localhost/g" lamp.sh laravel.sh
 fi
 
 echo '-- Enter the base memory size of your Virtual Box VM in MB (min of 64MB, max of 8192MB ). --'
@@ -73,14 +73,6 @@ while true;
 	    read LARAVEL
 	    case $LARAVEL in
 	        [Yy]* ) echo '-- You answered YES. Laravel will be installed for this project. --';
-					echo "-- Enter a name for your Laravel project or leave this blank and default to 'laravel'. --";
-					#Needs character validation
-					read PROJECTNAME;
-					if [[ $PROJECTNAME ]]; then
-						sed -i "s/PROJECTNAME/$PROJECTNAME/g" laravel.sh
-					else
-						sed -i "s/PROJECTNAME/laravel/g" laravel.sh
-					fi
 					break;;
 	        [Nn]* ) echo '-- You answered NO. Laravel will not be installed for this project. --';
 					LARAVEL="no";
@@ -90,16 +82,39 @@ while true;
 	    esac
 done
 
-#check if laravel, then prompt for environment setttings
-# if [[ condition ]]; then
-
-# fi
-
 #Set Laravel check to "yes" or "no", depending on input
 sed -i "s/LARACHECK/$LARAVEL/g" lamp.sh
 
+#check if laravel, then prompt for environment setttings
+if [[ ! $LARAVEL == "no" ]]; then
+	echo "-- Enter a name for your Laravel project or leave this blank and default to 'laravel'. --";
+	#Needs character validation
+	read PROJECTNAME;
+	if [[ $PROJECTNAME ]]; then
+		sed -i "s/PROJECTNAME/$PROJECTNAME/g" laravel.sh
+	else
+		sed -i "s/PROJECTNAME/laravel/g" laravel.sh
+	fi
+
+	while true;
+		do
+			echo '-- Would you like your Laravel project to start in a development environment? --'
+			echo "-- If you answer 'no', Laravel will use the default configuration.  --"
+			read ENVIRONMENTCONFIG
+			case $ENVIRONMENTCONFIG in
+				[Yy]* ) break;;
+		        [Nn]* ) ENVIRONMENTCONFIG="no";
+						break;;
+		        * ) echo '-- Please answer yes or no. --';;
+			esac
+	done
+
+	sed -i "s/ENVCHECK/$ENVIRONMENTCONFIG/g" laravel.sh
+fi
+
+
 echo '-- Enter a name for your MySQL Database. Database names are case sensitive. --'
-echo '-- If no name is entered you will have to create your database manually. --'
+echo '-- If no name is entered, a default database named dbname will be created instead. --'
 read DBNAME
 
 if [[ $DBNAME ]]; then
@@ -108,9 +123,11 @@ if [[ $DBNAME ]]; then
 		echo '-- Please enter a valid database name. --'
 		read DBNAME
 	done
+else
+	DBNAME="dbname"
 fi
 #set Database name
-sed -i "s/DBNAME/$DBNAME/g" lamp.sh
+sed -i "s/DBNAME/$DBNAME/g" lamp.sh laravel.sh
 
 echo '-- Enter a password to be used with both MySQL and PHPMyAdmin --'
 echo "-- If no password is entered, the password will default to 'root'. --"
@@ -123,7 +140,7 @@ else
 	DBPASSWORD="root"
 fi
 #set Database password
-sed -i "s/DBPASSWORD/$DBPASSWORD/g" lamp.sh
+sed -i "s/DBPASSWORD/$DBPASSWORD/g" lamp.sh laravel.sh
 
 echo "-- Now running 'vagrant up' --"
 vagrant up

@@ -2,6 +2,10 @@
 
 #User input
 PROJECT_NAME="PROJECTNAME"
+ENV_CHECK="ENVCHECK"
+HOST_NAME="'HOSTNAME'"
+DB_PASSWORD="'DBPASSWORD'"
+DB_NAME="'DBNAME'"
 
 #Laravel Configuration Script
 echo "Installing Laravel."
@@ -24,6 +28,25 @@ sed -i $"{/\"classmap\"/,/]/ { s/]/],/g}}" composer.json
 sed -ie "/\"classmap\"/,/],/!b;/],/a\\\t\t\"psr-4\": {},\n\\t\t\"files\": []" composer.json
 composer dump-autoload
 composer update
+
+if [[ ! $ENV_CHECK == "no" ]]; then
+	mkdir /vagrant/${PROJECT_NAME}/app/config/development
+	cd /vagrant/${PROJECT_NAME}/app/config/development
+	touch database.php
+cat << EOF | sudo tee -a database.php
+<?php
+	return [
+		'connections'	=>	[
+			'mysql'	=>	[
+				'host'      => $HOST_NAME,
+				'database'  => $DB_NAME,
+				'username'  => 'root',
+				'password'  => $DB_PASSWORD
+			]
+		]
+	];
+EOF
+fi
 
 echo "Final update"
 sudo apt-get update

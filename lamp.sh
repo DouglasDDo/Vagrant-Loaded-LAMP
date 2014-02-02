@@ -39,7 +39,6 @@ cat << EOF | sudo tee -a /etc/apache2/apache2.conf
 EOF
 fi
 
-
 sudo service apache2 restart
 
 echo "Installing and configuring MySQL."
@@ -55,6 +54,8 @@ sudo apt-get install libaio1
 
 sudo apt-get update
 sudo service mysql restart
+
+mysql -uroot -e "create database ${DB_NAME}" -p$DB_PASSWORD
 
 echo "Installing and configuring PHP."
 sudo add-apt-repository -y ppa:ondrej/php5
