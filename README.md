@@ -15,4 +15,3 @@ That's it.
 
 ###Future Plans:
 * Add environment configuration in bootstrap>start.php to Laravel.sh
-* Add autoload arrays for PSR and files in composer.json to Laravel.sh
