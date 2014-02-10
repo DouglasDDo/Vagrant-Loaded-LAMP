@@ -77,6 +77,7 @@ while true;
 	        [Nn]* ) echo '-- You answered NO. Laravel will not be installed for this project. --';
 					LARAVEL="no";
 					sed -i "/config.vm.provision :shell, :path => \"laravel.sh\"/d" Vagrantfile;
+					rm laravel.sh;
 					break;;
 	        * ) echo '-- Please answer yes or no. --';;
 	    esac
