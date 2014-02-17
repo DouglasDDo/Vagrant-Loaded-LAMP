@@ -26,14 +26,12 @@ if [[ $HOSTING ]]; then
 
 			#Set IP address in Vagrantfile and delete configuration used for hosting on localhost port 8080
 			sed -i "s/IPADDRESS/$HOSTING/g" Vagrantfile
-			#This delete is not working. Consider using substitution in the else portion instead
-			sed -i "/config.vm.network :forwarded_port, host: 8080, guest: 80/d" Vagrantfile
 
 			echo "-- Your project will be hosted on IP address $HOSTING. --"
 	done
 else
 	#Delete configurations used for virtual hosting
-	sed -i "/config.vm.network \"private_network\", ip: \"IPADDRESS\"/d" Vagrantfile
+	sed -i "s/config.vm.network \"private_network\", ip: \"IPADDRESS\"/config.vm.network :forwarded_port, host: 8080, guest: 80/g" Vagrantfile
 	sed  -i '/config.vm.usable_port_range = (2200..2250)/d' Vagrantfile
 
 	echo '-- Your project will be hosted on localhost port 8080. --'

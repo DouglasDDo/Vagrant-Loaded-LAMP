@@ -19,7 +19,6 @@ Vagrant.configure("2") do |config|
 ##########################################
 	config.vm.network "private_network", ip: "IPADDRESS"
 	config.vm.usable_port_range = (2200..2250)
-	config.vm.network :forwarded_port, host: 8080, guest: 80
 
 #Provisioning
 ##########################################
