@@ -28,9 +28,10 @@ if [[ $HOSTING ]]; then
 			sed -i "s/IPADDRESS/$HOSTING/g" Vagrantfile
 
 			echo "-- Your project will be hosted on IP address $HOSTING. --"
+			echo "-- Do not forget to set up a virtual host at this address in your hosts file on your hosting OS. --"
 	done
 else
-	#Delete configurations used for virtual hosting
+	#Delete configurations used for virtual hosting and replace virtual hosting with localhost
 	sed -i "s/config.vm.network \"private_network\", ip: \"IPADDRESS\"/config.vm.network :forwarded_port, host: 8080, guest: 80/g" Vagrantfile
 	sed  -i '/config.vm.usable_port_range = (2200..2250)/d' Vagrantfile
 
@@ -96,18 +97,19 @@ if [[ ! $LARAVEL == "no" ]]; then
 		sed -i "s/PROJECTNAME/laravel/g" laravel.sh
 	fi
 
-	while true;
-		do
-			echo '-- Would you like your Laravel project to start in a development environment? --'
-			echo "-- If you answer 'no', Laravel will use the default configuration.  --"
-			read ENVIRONMENTCONFIG
-			case $ENVIRONMENTCONFIG in
-				[Yy]* ) break;;
-		        [Nn]* ) ENVIRONMENTCONFIG="no";
-						break;;
-		        * ) echo '-- Please answer yes or no. --';;
-			esac
-	done
+#Environment check and setup. Unfinished.
+	# while true;
+	# 	do
+	# 		echo '-- Would you like your Laravel project to start in a development environment? --'
+	# 		echo "-- If you answer 'no', Laravel will use the default configuration.  --"
+	# 		read ENVIRONMENTCONFIG
+	# 		case $ENVIRONMENTCONFIG in
+	# 			[Yy]* ) break;;
+	# 	        [Nn]* ) ENVIRONMENTCONFIG="no";
+	# 					break;;
+	# 	        * ) echo '-- Please answer yes or no. --';;
+	# 		esac
+	# done
 
 	sed -i "s/ENVCHECK/$ENVIRONMENTCONFIG/g" laravel.sh
 fi
