@@ -59,6 +59,8 @@ mysql -uroot -e "create database ${DB_NAME}" -p$DB_PASSWORD
 
 echo "Installing and configuring PHP."
 sudo add-apt-repository -y ppa:ondrej/php5
+sudo apt-get update
+sudo apt-get upgrade
 sudo apt-get install -y php5
 
 sudo apt-get update
