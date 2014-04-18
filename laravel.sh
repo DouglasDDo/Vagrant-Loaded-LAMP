@@ -21,6 +21,16 @@ echo "Setting document root"
 sudo rm -rf /var/www
 sudo ln -fs /vagrant/${PROJECT_NAME}/public /var/www
 
+cat << EOF | sudo tee -a /etc/apache2/apache2.conf
+<VirtualHost *:80>
+     DocumentRoot "/vagrant/${PROJECT_NAME}/public"
+     ServerName $HOST_NAME
+     <Directory "/vagrant/${PROJECT_NAME}/public">
+          AllowOverride All
+     </Directory>
+</VirtualHost>
+EOF
+
 echo "Adding stuff to Composer.json"
 composer require --dev --no-update way/generators:dev-master
 sed -i "/WorkbenchServiceProvider/a \\\t\t'Way\\\Generators\\\GeneratorsServiceProvider'," /vagrant/${PROJECT_NAME}/app/config/app.php
