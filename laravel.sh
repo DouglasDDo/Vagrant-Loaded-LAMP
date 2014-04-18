@@ -23,7 +23,7 @@ sudo ln -fs /vagrant/${PROJECT_NAME}/public /var/www
 
 cat << EOF | sudo tee -a /etc/apache2/apache2.conf
 <VirtualHost *:80>
-     DocumentRoot "/vagrant/${PROJECT_NAME}/public"
+     DocumentRoot /vagrant/${PROJECT_NAME}/public
      ServerName $HOST_NAME
      <Directory "/vagrant/${PROJECT_NAME}/public">
           AllowOverride All
