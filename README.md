@@ -15,3 +15,4 @@ That's it.
 
 ###Future Plans:
 * Add environment configuration in bootstrap>start.php to Laravel.sh
+* Add option to turn on debug on install (as of 4.1.26, debug is set to false by default)
