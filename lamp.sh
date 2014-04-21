@@ -76,7 +76,7 @@ echo "Installing and configuring XDebug."
 sudo apt-get install -y php5-xdebug
 
 cat << EOF | sudo tee -a /etc/php5/mods-available/xdebug.ini
-xdebug.scream=1
+xdebug.scream=0
 xdebug.cli_color=1
 xdebug.show_local_vars=1
 EOF
