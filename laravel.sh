@@ -2,7 +2,6 @@
 
 #User input
 PROJECT_NAME="PROJECTNAME"
-ENV_CHECK="ENVCHECK"
 HOST_NAME="'HOSTNAME'"
 DB_PASSWORD="'DBPASSWORD'"
 DB_NAME="'DBNAME'"
@@ -39,10 +38,22 @@ sed -ie "/\"classmap\"/,/],/!b;/],/a\\\t\t\"psr-4\": {},\n\\t\t\"files\": []" co
 composer dump-autoload
 composer update
 
-if [[ ! $ENV_CHECK == "no" ]]; then
-	mkdir /vagrant/${PROJECT_NAME}/app/config/development
-	cd /vagrant/${PROJECT_NAME}/app/config/development
-	touch database.php
+#Create development environment settings
+mkdir /vagrant/${PROJECT_NAME}/app/config/development
+cd /vagrant/${PROJECT_NAME}/app/config/development
+
+#Create development env app file with debugging on
+touch app.php
+cat << EOF | sudo tee -a app.php
+<?php
+
+return [
+    'debug' => true
+];
+EOF
+
+#Create development env DB file with dev credentials
+touch database.php
 cat << EOF | sudo tee -a database.php
 <?php
 	return [
@@ -56,7 +67,14 @@ cat << EOF | sudo tee -a database.php
 		]
 	];
 EOF
-fi
+
+#Create custom directories.
+mkdir -p /vagrant/${PROJECT_NAME}/app/abstractions/{interfaces,repositories,services}
+
+mkdir -p /vagrant/${PROJECT_NAME}/app/views/_partials/forms
+
+mkdir -p /vagrant/${PROJECT_NAME}/public/assets/{css,js,img}
+
 
 echo "Final update"
 sudo apt-get update

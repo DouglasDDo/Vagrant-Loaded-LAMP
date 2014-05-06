@@ -24,7 +24,7 @@ if [[ $HOSTING ]]; then
 			echo '-- The IP address was not valid. Try again. --'
 			read HOSTING
 
-			#Set IP address in Vagrantfile and delete configuration used for hosting on localhost port 8080
+			#Set IP address in Vagrantfile
 			sed -i "s/IPADDRESS/$HOSTING/g" Vagrantfile
 
 			echo "-- Your project will be hosted on IP address $HOSTING. --"
@@ -96,22 +96,6 @@ if [[ ! $LARAVEL == "no" ]]; then
 	else
 		sed -i "s/PROJECTNAME/laravel/g" laravel.sh
 	fi
-
-#Environment check and setup. Unfinished.
-	# while true;
-	# 	do
-	# 		echo '-- Would you like your Laravel project to start in a development environment? --'
-	# 		echo "-- If you answer 'no', Laravel will use the default configuration.  --"
-	# 		read ENVIRONMENTCONFIG
-	# 		case $ENVIRONMENTCONFIG in
-	# 			[Yy]* ) break;;
-	# 	        [Nn]* ) ENVIRONMENTCONFIG="no";
-	# 					break;;
-	# 	        * ) echo '-- Please answer yes or no. --';;
-	# 		esac
-	# done
-
-	sed -i "s/ENVCHECK/$ENVIRONMENTCONFIG/g" laravel.sh
 fi
 
 
