@@ -63,8 +63,8 @@ sudo apt-get install -y php5
 
 sudo apt-get update
 
-echo "Installing and configuring PHP specific components."
-sudo apt-get install -y libapache2-mod-php5 php5-curl php5-gd php5-mcrypt php5-mysql openssl phpunit
+echo "Installing and configuring additional components."
+sudo apt-get install -y libapache2-mod-php5 php5-curl php5-gd php5-mcrypt php5-mysql openssl phpunit memcached
 
 #Turn on error reporting
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini
