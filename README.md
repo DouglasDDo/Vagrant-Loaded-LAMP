@@ -14,5 +14,7 @@ Run "./setup.sh" and respond to the prompts.
 That's it.
 
 ###Future Plans:
-* Add environment configuration in bootstrap>start.php to Laravel.sh
-* Add option to turn on debug on install (as of 4.1.26, debug is set to false by default)
+* Add environment configuration in bootstrap>start.php to Laravel.sh [Completed]
+* Add option to turn on debug on install (as of 4.1.26, debug is set to false by default) [Completed]
+* Add JavaScript Utility tool for Laravel
+* Add basic view templates and components (partials, layouts, etc.)
