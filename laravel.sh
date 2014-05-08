@@ -60,10 +60,10 @@ cat << EOF | sudo tee -a database.php
 	return [
 		'connections'	=>	[
 			'mysql'	=>	[
-				'host'      => $HOST_NAME,
-				'database'  => $DB_NAME,
+				'host'      => $ENV_HOST_NAME,
+				'database'  => $ENV_DB_NAME,
 				'username'  => 'root',
-				'password'  => $DB_PASSWORD
+				'password'  => $ENV_DB_PASSWORD
 			]
 		]
 	];
