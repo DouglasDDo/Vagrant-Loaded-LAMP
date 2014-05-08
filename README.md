@@ -18,3 +18,4 @@ That's it.
 * Add option to turn on debug on install (as of 4.1.26, debug is set to false by default) [Completed]
 * Add JavaScript Utility tool for Laravel
 * Add basic view templates and components (partials, layouts, etc.)
+* Consider: Merging this repo and the Vanilla repo
