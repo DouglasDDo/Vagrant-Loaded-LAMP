@@ -57,7 +57,7 @@ mysql -uroot -e "create database ${DB_NAME}" -p$DB_PASSWORD
 
 #READ: This is a temporary fix for problems with mysql connections while using a vhost setup
 sed -i "s/bind-address = 127.0.0.1/bind-address = 0.0.0.0/g" /etc/mysql/my.cnf
-mysql -uroot -p$DB_PASSWORD -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'${HOST_NAME}' IDENTIFIED BY '${DB_PASSWORD}' WITH GRANT OPTION;"
+mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'${HOST_NAME}' IDENTIFIED BY '${DB_PASSWORD}' WITH GRANT OPTION;" -p$DB_PASSWORD
 sudo service mysql restart
 
 echo "Installing PHP."
