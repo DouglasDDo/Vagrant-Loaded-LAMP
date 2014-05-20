@@ -38,7 +38,7 @@ else
 	echo '-- Your project will be hosted on localhost port 8080. --'
 fi
 
-sed -i "s/IPADDRESS/$HOSTING/g" Vagrantfile
+sed -i "s/IPADDRESS/$HOSTING/g" Vagrantfile lamp.sh
 
 echo '-- If you intend on using a specific host name enter it below. --'
 echo "-- If you do not enter a name, the host name will default to 'localhost' --"
