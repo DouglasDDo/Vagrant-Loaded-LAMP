@@ -43,21 +43,21 @@ echo "Installing and configuring MySQL."
 export DEBIAN_FRONTEND=noninteractive
 
 #Set passwords for MySQL installation prompt
-echo "mysql-server-5.5 mysql-server/root_password password ${DB_PASSWORD}" | debconf-set-selections
-echo "mysql-server-5.5 mysql-server/root_password_again password ${DB_PASSWORD}" | debconf-set-selections
-echo "mysql-server-5.5 mysql-server/root_password_again password ${DB_PASSWORD}" | debconf-set-selections
+echo "mysql-server mysql-server/root_password password ${DB_PASSWORD}" | debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password ${DB_PASSWORD}" | debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password ${DB_PASSWORD}" | debconf-set-selections
 
-sudo apt-get install -q -y mysql-server-5.5 mysql-client
+sudo apt-get install -q -y mysql-server mysql-client
 sudo apt-get install -q -y libaio1
 
 sudo apt-get update
 sudo service mysql restart
 
-mysql -uroot -e "create database ${DB_NAME}" -p$DB_PASSWORD
+mysql -uroot -e "CREATE DATABASE ${DB_NAME}" -p$DB_PASSWORD
 
 #READ: This is a temporary fix for problems with mysql connections while using a vhost setup
 sudo sed -i "s/127.0.0.1/0.0.0.0/g" /etc/mysql/my.cnf
-echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'${HOST_NAME}' IDENTIFIED BY '${DB_PASSWORD}' WITH GRANT OPTION;"| mysql -uroot -p$DB_PASSWORD
+echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'$HOST_NAME' IDENTIFIED BY '$DB_PASSWORD' WITH GRANT OPTION;"| mysql -uroot -p$DB_PASSWORD
 sudo service mysql restart
 
 echo "Installing PHP."
