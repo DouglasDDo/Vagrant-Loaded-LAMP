@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 #User input
+IP_ADDRESS="IPADDRESS"
 HOST_NAME="HOSTNAME"
 DB_PASSWORD="DBPASSWORD"
 DB_NAME="DBNAME"
@@ -57,7 +58,7 @@ mysql -uroot -e "CREATE DATABASE ${DB_NAME}" -p$DB_PASSWORD
 
 #READ: This is a temporary fix for problems with mysql connections while using a vhost setup
 sudo sed -i "s/127.0.0.1/0.0.0.0/g" /etc/mysql/my.cnf
-echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'$HOST_NAME' IDENTIFIED BY '$DB_PASSWORD' WITH GRANT OPTION;"| mysql -uroot -p$DB_PASSWORD
+echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'$IP_ADDRESS' IDENTIFIED BY '$DB_PASSWORD' WITH GRANT OPTION;"| mysql -uroot -p$DB_PASSWORD
 echo "FLUSH PRIVILEGES"| mysql -uroot -p$DB_PASSWORD
 sudo service mysql restart
 
