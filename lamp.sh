@@ -7,7 +7,7 @@ DB_NAME="DBNAME"
 LARAVEL="LARACHECK"
 
 echo "Installing base components"
-sudo apt-get install -y vim curl git-core git python-software-properties
+sudo apt-get install -y vim curl git-core git python-software-properties software-properties-common
 
 echo "Initial update"
 sudo apt-get update
