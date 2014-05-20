@@ -48,7 +48,7 @@ echo "mysql-server-5.5 mysql-server/root_password_again password ${DB_PASSWORD}"
 echo "mysql-server-5.5 mysql-server/root_password_again password ${DB_PASSWORD}" | debconf-set-selections
 
 sudo apt-get install -q -y mysql-server-5.5 mysql-client
-sudo apt-get install libaio1
+sudo apt-get install -q -y libaio1
 
 sudo apt-get update
 sudo service mysql restart
