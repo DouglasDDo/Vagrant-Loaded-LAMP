@@ -109,12 +109,12 @@ sudo mv composer.phar /usr/local/bin/composer
 
 #Install NodeJS for Gulp and Bower (Commented out for the time being. Not using these enough yet.)
 #echo "Installing Node.JS"
-#echo "deb http://ftp.us.debian.org/debian wheezy-backports main" >> /etc/apt/sources.list
+#echo "deb http://ftp.us.debian.org/debian wheezy-backports main" | sudo tee -a /etc/apt/sources.list
 #sudo apt-get update
-#sudo apt-get install nodejs-legacy -q
-#sudo curl --insecure https://www.npmjs.org/install.sh | bash
+#sudo apt-get install -y nodejs-legacy -q
+#curl https://www.npmjs.org/install.sh | sudo clean=no sh
 #
 #sudo apt-get update
 #
-#npm install -g bower
-#npm install -g gulp
+#sudo npm install -g bower
+#sudo npm install -g gulp
