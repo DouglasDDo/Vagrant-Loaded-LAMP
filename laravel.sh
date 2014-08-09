@@ -69,10 +69,11 @@ cat << EOF | sudo tee -a database.php
 	];
 EOF
 
-cd /vagrant/${PROJECT_NAME}/bootstrap
-sed -i "s/detectEnvironment(array(/detectEnvironment(function(){/g" start.php
-sed -i "s/'local' => array('homestead'),/return getenv('ENV') ?	: 'development';/g" start.php
-sed -i "s/));/});/g" start.php
+# There's a better way to do this
+# cd /vagrant/${PROJECT_NAME}/bootstrap
+# sed -i "s/detectEnvironment(array(/detectEnvironment(function(){/g" start.php
+# sed -i "s/'local' => array('homestead'),/return getenv('ENV') ?	: 'development';/g" start.php
+# sed -i "s/));/});/g" start.php
 
 #Create custom directories.
 mkdir -p /vagrant/${PROJECT_NAME}/app/abstractions/{interfaces,repositories,services}
