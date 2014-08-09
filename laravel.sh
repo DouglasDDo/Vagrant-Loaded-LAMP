@@ -69,6 +69,7 @@ cat << EOF | sudo tee -a database.php
 	];
 EOF
 
+cd /vagrant/${PROJECT_NAME}
 
 #Create custom directories.
 mkdir -p /vagrant/${PROJECT_NAME}/app/abstractions/{interfaces,repositories,services}
