@@ -63,12 +63,25 @@ echo "FLUSH PRIVILEGES"| mysql -uroot -p$DB_PASSWORD
 sudo service mysql restart
 
 echo "Installing PHP."
-sudo add-apt-repository -y ppa:ondrej/php5
-sudo apt-get update
-sudo apt-get upgrade
 sudo apt-get install -y php5
 
 sudo apt-get update
+
+#Adds debdot sources needed to install php5.5. Install php5.5 manually.
+cat << EOF | sudo tee -a /etc/apt/sources.list
+
+#debdot resources 
+
+deb http://packages.dotdeb.org wheezy-php55 all
+deb-src http://packages.dotdeb.org wheezy-php55 all
+
+EOF
+
+sudo wget http://www.dotdeb.org/dotdeb.gpg
+sudo apt-key add dotdeb.gpg
+
+sudo apt-get update
+
 
 echo "Installing and configuring additional components."
 sudo apt-get install -y libapache2-mod-php5 php5-curl php5-gd php5-mcrypt php5-mysql openssl phpunit memcached
